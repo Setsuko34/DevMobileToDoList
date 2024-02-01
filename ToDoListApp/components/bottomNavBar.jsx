@@ -1,11 +1,14 @@
 import * as React from "react";
+import { View, StyleSheet } from "react-native";
 import { BottomNavigation, Text } from "react-native-paper";
+import { DoneView } from "./view/doneView";
+import { OngoingView } from "./view/ongoingView";
+import { TodoView } from "./view/todoView";
 
-const todoRoute = () => <Text>todo</Text>;
+const todoRoute = () => <TodoView />;
+const ongoingRoute = () => <OngoingView />;
 
-const ongoingRoute = () => <Text>ongoing</Text>;
-
-const doneRoute = () => <Text>done</Text>;
+const doneRoute = () => <DoneView />;
 
 const BottomNavBar = () => {
   const [index, setIndex] = React.useState(0);
