@@ -24,7 +24,7 @@ const ToDoComponent = () => {
   const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
   const RightContent = (props) => (
     <Button icon={MORE_ICON} mode="contained" onPress={showModal}>
-      {" "}
+      {"Action"}
     </Button>
   );
 

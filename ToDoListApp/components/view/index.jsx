@@ -7,6 +7,7 @@ import { FabButton } from "../fab.jsx";
 import { BottomNavBar } from "../bottomNavBar.jsx";
 export default function Index() {
   const theme = useTheme();
+
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <AppbarComponent />
