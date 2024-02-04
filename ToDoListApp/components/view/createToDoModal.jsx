@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Portal, Modal, Text } from "react-native-paper";
-
+import { Formadd } from "../formadd";
 const CreateToDoModal = ({ visible, hideModal }) => {
   //for the modal body from the doc react-native-paper
   //const [visible, setVisible] = React.useState(false);
@@ -14,7 +14,7 @@ const CreateToDoModal = ({ visible, hideModal }) => {
         contentContainerStyle={containerStyle}
         style={{ margin: 20 }}
       >
-        <Text>Example Modal. Click outside this area to dismiss.</Text>
+        <Formadd />
       </Modal>
     </Portal>
   );
