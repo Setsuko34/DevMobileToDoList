@@ -6,7 +6,6 @@ import { ToDoComponent } from "../toDo";
 const OngoingView = () => {
   return (
     <View style={styles.container}>
-      <Text>on going</Text>
       <ToDoComponent />
       <ToDoComponent />
     </View>

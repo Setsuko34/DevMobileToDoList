@@ -2,13 +2,15 @@ import React from "react";
 import { StyleSheet, View, useState } from "react-native";
 import { useTheme, FAB, Portal, Modal, Text } from "react-native-paper";
 import { CreateToDoModal } from "./view/createToDoModal";
+import { BottomSheetUpdate } from "./forms/bottomSheetUpdate";
+import Animated from "react-native-reanimated";
 
 const FabButton = () => {
   const [visible, setVisible] = React.useState(false);
-  const theme = useTheme();
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
+  // cosnt showBottomSheet = () => setVisible(true);
   return (
     <View>
       <FAB style={styles.fab} icon="plus" onPress={showModal} />
