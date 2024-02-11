@@ -1,8 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Portal, Modal, Text, Button } from "react-native-paper";
-import { TextInput } from "react-native-paper";
-import { Formadd } from "../forms/formadd";
+import { Portal, Modal, Text } from "react-native-paper";
 
 const CreateToDoModal = ({ visible, hideModal }) => {
   //for the modal body from the doc react-native-paper
