@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { Portal, Modal, Text, Button } from "react-native-paper";
 import { TextInput } from "react-native-paper";
 
+
 const MoreModal = ({ visible, hideModal }) => {
   //for the modal body from the doc react-native-paper
   //const [visible, setVisible] = React.useState(false);

@@ -4,6 +4,7 @@ import { Portal, Modal, Text, Button } from "react-native-paper";
 import { TextInput } from "react-native-paper";
 import { Deletebutton } from "../DeleteButton";
 import { Modifybutton } from "../ModifyButton";
+import { ToDoComponent } from "../toDo.jsx";
 
 const ActionModal = ({ visible, hideModal }) => {
   //for the modal body from the doc react-native-paper
