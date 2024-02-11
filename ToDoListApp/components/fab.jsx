@@ -1,8 +1,7 @@
 import React from "react";
 import { StyleSheet, View, useState } from "react-native";
 import { useTheme, FAB, Portal, Modal, Text } from "react-native-paper";
-import { CreateToDoModal } from "./view/createToDoModal";
-import { BottomSheetUpdate } from "./forms/bottomSheetUpdate";
+import { CreateToDoModal } from "./modals/createToDoModal";
 import Animated from "react-native-reanimated";
 
 const FabButton = () => {

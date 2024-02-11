@@ -1,13 +1,13 @@
 import React, { useRef, useState, useCallback } from "react";
 import { StyleSheet, View } from "react-native";
-import { useTheme, Avatar, Button, Card,Text } from "react-native-paper";
+import { useTheme, Avatar, Button, Card, Text } from "react-native-paper";
 import { Platform } from "react-native";
-import { ActionModal } from "./view/actionModal";
-import { MoreModal } from "./view/MoreModal";
+import { ActionModal } from "./modals/actionModal";
+import { MoreModal } from "./modals/MoreModal";
 
 const MORE_ICON = Platform.OS === "ios" ? "dots-horizontal" : "dots-vertical";
 
-const ToDoComponent = () => {
+const ToDoComponent = (props) => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   const [visible, setVisible] = React.useState(false);
@@ -20,43 +20,41 @@ const ToDoComponent = () => {
   const showModal2 = () => setVisible2(true);
   const hideModal2 = () => setVisible2(false);
 
-  const showBottomSheet = () => {
-    setIsBottomSheetOpen(true);
-  };
-
-  const hideBottomSheet = useCallback(() => {
-    setIsBottomSheetOpen(false);
-  }, []);
-
-  const LeftContent = (props) => <Avatar.Icon {...props} icon="folder"/>;
+  const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
   const RightContent = (props) => (
-    
     <View>
-
       <Button icon={MORE_ICON} mode="contained" onPress={showModal}>
         {"Action"}
         <ActionModal visible={visible} hideModal={hideModal} />
       </Button>
-
-
-      <Text icon='more' mode="contained" style ={{margin: 5}}  onPress={showModal2} >
-        {"En Savoir plus"}
-        <MoreModal visible={visible2} hideModal={hideModal2} />
-      </Text>
-
     </View>
+  );
+
+  const MoreContent = (props) => (
+    <Text
+      icon="more"
+      mode="contained"
+      style={{ margin: 5 }}
+      onPress={showModal2}
+    >
+      {"En savoir plus"}
+      <MoreModal
+        visible={visible2}
+        hideModal={hideModal2}
+        description={props.description}
+      />
+    </Text>
   );
 
   return (
     <View>
       <Card style={styles.toDoElement}>
         <Card.Title
-          title="Card Title"
-          subtitle="Card Subtitle"
+          title={props.title}
+          subtitle={<MoreContent description={props.description} />}
           left={LeftContent}
           right={RightContent}
         />
-
       </Card>
     </View>
   );

@@ -17,7 +17,7 @@ const AppbarComponent = () => {
           style={{ color: theme.colors.onBackground }}
         /> */}
       <Appbar.Content title="ToDo List" color={theme.colors.onPrimary} />
-      <Appbar.Action
+      {/* <Appbar.Action
         icon="magnify"
         onPress={() => {}}
         color={theme.colors.onPrimary}
@@ -26,7 +26,7 @@ const AppbarComponent = () => {
         icon={MORE_ICON}
         onPress={() => {}}
         color={theme.colors.onPrimary}
-      />
+      /> */}
     </Appbar.Header>
   );
 };

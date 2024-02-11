@@ -1,24 +1,45 @@
-import React, { useState, useCallback } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { Text } from "react-native-paper";
 import { ToDoComponent } from "../toDo";
-import { BottomSheetUpdate } from "../forms/bottomSheetUpdate";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const getTodos = async () => {
+  try {
+    const todos = await AsyncStorage.getItem("todoLists");
+    if (todos != null) {
+      const parsedTodos = JSON.parse(todos);
+      console.log("todos", parsedTodos);
+      return Array.isArray(parsedTodos) ? parsedTodos : [];
+    } else {
+      return [];
+    }
+    //return todos != null ? JSON.parse(todos) : [];
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const TodoView = () => {
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const [todos, setTodos] = useState([]);
 
-  const showBottomSheet = () => {
-    setIsBottomSheetOpen(true);
-  };
-
-  const hideBottomSheet = useCallback(() => {
-    setIsBottomSheetOpen(false);
+  useEffect(() => {
+    getTodos().then(setTodos);
   }, []);
   return (
-    <View style={styles.container}>
-      <ToDoComponent />
-      <BottomSheetUpdate isOpen={isBottomSheetOpen} onClose={hideBottomSheet} />
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        {todos
+          .filter((todo) => todo.status === "todo")
+          .map((todo, index) => (
+            <ToDoComponent
+              key={index}
+              title={todo.title}
+              description={todo.description}
+            />
+          ))}
+      </View>
+    </ScrollView>
   );
 };
 

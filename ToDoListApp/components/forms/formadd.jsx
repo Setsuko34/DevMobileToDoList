@@ -8,12 +8,13 @@ import RNPickerSelect from "react-native-picker-select";
 const Formadd = ({}) => {
   const [Title, setTitle] = React.useState("");
   const [Description, setDescription] = React.useState("");
+  const [Status, setStatus] = React.useState("todo");
 
   const task = {
     id: Math.random().toString(),
     title: Title,
     description: Description,
-    status: "todo",
+    status: Status,
   };
 
   const getData = async () => {
@@ -29,10 +30,21 @@ const Formadd = ({}) => {
     }
   };
 
+  //TODO : faire le delete d'une tache, l'update  et enfin le context afin de mettre a jour dynamiquement les taches et les listes affichée de celles ci, pensez aussi a faire fermer les modales au moment de la creation, de l'update ou de l'appui d'un boutton.
+
   const storeData = async (task) => {
     try {
-      const jsonValue = JSON.stringify(task);
-      await AsyncStorage.setItem("task", jsonValue);
+      const existingTasks = await AsyncStorage.getItem("todoLists");
+      const tasksArray = existingTasks ? JSON.parse(existingTasks) : [];
+      tasksArray.push(task);
+      const jsonValue = JSON.stringify(tasksArray);
+      await AsyncStorage.setItem("todoLists", jsonValue);
+      // let tasks = [];
+      // if (existingTasks) {
+      //   tasks = JSON.parse(existingTasks);
+      // }
+      // const jsonValue = JSON.stringify(task);
+      // await AsyncStorage.setItem("task", jsonValue);
     } catch (err) {
       console.log(err);
     }
@@ -41,8 +53,8 @@ const Formadd = ({}) => {
   React.useEffect(() => {
     getData().then((tasks) => {
       console.log(tasks);
-      setTitle(tasks.title);
-      setDescription(tasks.description);
+      // setTitle(tasks.title);
+      // setDescription(tasks.description);
     });
   }, []);
 
@@ -62,12 +74,34 @@ const Formadd = ({}) => {
         style={{ marginVertical: 10, height: 75 }}
       />
       <RNPickerSelect
-        onValueChange={(value) => console.log(value)}
+        onValueChange={(value) => setStatus(value)}
         items={[
-          { label: "ToDo", value: "ToDo" },
-          { label: "OnGoing", value: "OnGoing" },
-          { label: "Done", value: "Done" },
+          { label: "ToDo", value: "todo" },
+          { label: "OnGoing", value: "ongoing" },
+          { label: "Done", value: "done" },
         ]}
+        style={{
+          inputIOS: {
+            fontSize: 16,
+            paddingVertical: 12,
+            paddingHorizontal: 10,
+            borderWidth: 1,
+            borderColor: "gray",
+            borderRadius: 4,
+            color: "black",
+            paddingRight: 30, // to ensure the text is not cut off
+          },
+          inputAndroid: {
+            fontSize: 16,
+            paddingHorizontal: 10,
+            paddingVertical: 8,
+            borderWidth: 0.5,
+            borderColor: "purple",
+            borderRadius: 8,
+            color: "black",
+            paddingRight: 30, // to ensure the text is not cut off
+          },
+        }}
       />
 
       <Button

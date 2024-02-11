@@ -2,15 +2,11 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Portal, Modal, Text, Button } from "react-native-paper";
 import { TextInput } from "react-native-paper";
-import { Deletebutton } from "../DeleteButton";
-import { Modifybutton } from "../ModifyButton";
-import { ToDoComponent } from "../toDo.jsx";
 
-const ActionModal = ({ visible, hideModal }) => {
+const MoreModal = ({ visible, hideModal, description }) => {
   //for the modal body from the doc react-native-paper
   //const [visible, setVisible] = React.useState(false);
   const containerStyle = { backgroundColor: "white", padding: 20 };
-
 
   return (
     <Portal>
@@ -19,13 +15,11 @@ const ActionModal = ({ visible, hideModal }) => {
         onDismiss={hideModal}
         contentContainerStyle={containerStyle}
         style={{ margin: 5 }}
-
       >
-        <Deletebutton />
-        <Modifybutton />
+        <Text>{description}</Text>
       </Modal>
     </Portal>
   );
 };
 
-export { ActionModal };
+export { MoreModal };
