@@ -2,32 +2,18 @@ import React, { useState, useEffect, useCallback } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { Text } from "react-native-paper";
 import { ToDoComponent } from "../toDo";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MaterialIcons } from "@expo/vector-icons";
-
-const getTodos = async () => {
-  try {
-    const todos = await AsyncStorage.getItem("todoLists");
-    if (todos != null) {
-      const parsedTodos = JSON.parse(todos);
-      console.log("todos", parsedTodos);
-      return Array.isArray(parsedTodos) ? parsedTodos : [];
-    } else {
-      return [];
-    }
-    //return todos != null ? JSON.parse(todos) : [];
-  } catch (err) {
-    console.log(err);
-  }
-};
+import TodoContext from "../context/Context";
 
 const TodoView = () => {
-  const [todos, setTodos] = useState([]);
+  const { Todo } = React.useContext(TodoContext);
 
-  useEffect(() => {
-    getTodos().then(setTodos);
-  }, []);
-  const createdTodos = todos.filter((todo) => todo.status === "todo");
+  // useEffect(() => {
+  //   console.log("TodoView: ", Todo);
+  // }, [Todo]);
+
+  const createdTodos = Todo.filter((todo) => todo.status === "todo");
+  //console.log("createdTodos: ", createdTodos);
   return (
     <ScrollView>
       {createdTodos.length > 0 ? (

@@ -2,51 +2,15 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Portal, Modal, Text, Button } from "react-native-paper";
 import { TextInput } from "react-native-paper";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import RNPickerSelect from "react-native-picker-select";
 import uuid from "react-native-uuid";
-const Formadd = ({}) => {
+import TodoContext from "../context/Context";
+
+const Formadd = ({ hideModal }) => {
   const [Title, setTitle] = React.useState("");
   const [Description, setDescription] = React.useState("");
-  const [Status, setStatus] = React.useState("todo");
-
-  const task = {
-    id: uuid.v4(),
-    title: Title,
-    description: Description,
-    status: Status,
-  };
-
-  const getData = async () => {
-    try {
-      const tasks = await AsyncStorage.getItem("task");
-      return tasks != null ? JSON.parse(tasks) : null;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  //TODO : faire le delete d'une tache, l'update  et enfin le context afin de mettre a jour dynamiquement les taches et les listes affichée de celles ci, pensez aussi a faire fermer les modales au moment de la creation, de l'update ou de l'appui d'un boutton.
-
-  const storeData = async (task) => {
-    try {
-      const existingTasks = await AsyncStorage.getItem("todoLists");
-      const tasksArray = existingTasks ? JSON.parse(existingTasks) : [];
-      tasksArray.push(task);
-      const jsonValue = JSON.stringify(tasksArray);
-      await AsyncStorage.setItem("todoLists", jsonValue);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  React.useEffect(() => {
-    getData().then((tasks) => {
-      console.log(tasks);
-      // setTitle(tasks.title);
-      // setDescription(tasks.description);
-    });
-  }, []);
+  const [status, setStatus] = React.useState("todo");
+  const { storeTodo } = React.useContext(TodoContext);
 
   return (
     <View>
@@ -97,7 +61,16 @@ const Formadd = ({}) => {
       <Button
         icon="check"
         mode="elevated"
-        onPress={() => storeData(task)}
+        onPress={() => {
+          const task = {
+            id: uuid.v4(),
+            title: Title,
+            description: Description,
+            status: status,
+          };
+          storeTodo(task);
+          hideModal();
+        }}
         labelStyle={{ fontSize: 40 }}
         style={{ marginTop: 10 }}
       ></Button>

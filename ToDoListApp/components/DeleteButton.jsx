@@ -1,27 +1,18 @@
 import React from "react";
 import { Portal, Modal, Text, Button } from "react-native-paper";
 import { View } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const deleteTask = async (idToDelete) => {
-  const tasksArray = await AsyncStorage.getItem("todoLists");
-  let tasks = tasksArray != null ? JSON.parse(tasksArray) : [];
-  const deletedTask = tasks.filter((task) => task.id !== idToDelete);
-  await AsyncStorage.setItem("todoLists", JSON.stringify(deletedTask));
-};
-
-// const DeleteTask = (id) => {
-//   const updatedTask = ToDoComponent.filter((task) => task.id !== id);
-// };
+import TodoContext from "./context/Context";
 
 const Deletebutton = (props) => {
+  const { deleteTodo } = React.useContext(TodoContext);
   return (
     <View>
       <Button
         icon="delete"
         mode="contained-tonal"
         onPress={() => {
-          deleteTask(props.id);
+          deleteTodo(props.id);
+          props.hideModal();
           console.log("tache supprimée : ", props.id);
         }}
         style={{ margin: 5 }}

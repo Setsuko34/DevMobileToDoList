@@ -4,8 +4,6 @@ import { Portal, Modal, Text } from "react-native-paper";
 import { Formadd } from "../forms/formadd";
 
 const CreateToDoModal = ({ visible, hideModal }) => {
-  //for the modal body from the doc react-native-paper
-  //const [visible, setVisible] = React.useState(false);
   const containerStyle = { backgroundColor: "white", padding: 20 };
   const [text, setText] = React.useState("");
   const [Description, setDescription] = React.useState("");
@@ -18,7 +16,7 @@ const CreateToDoModal = ({ visible, hideModal }) => {
         contentContainerStyle={containerStyle}
         style={{ margin: 20 }}
       >
-        <Formadd />
+        <Formadd hideModal={hideModal} />
       </Modal>
     </Portal>
   );

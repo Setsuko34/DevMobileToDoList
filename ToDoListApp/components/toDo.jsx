@@ -41,12 +41,11 @@ const ToDoComponent = (props) => {
       <MoreModal visible={visible2} hideModal={hideModal2} todo={props.todo} />
     </Text>
   );
-
   return (
     <View>
       <Card style={styles.toDoElement}>
         <Card.Title
-          title={props.todo.title}
+          title={props.todo?.title}
           subtitle={<MoreContent todo={props.todo} />}
           left={LeftContent}
           right={() => <RightContent id={props.todo.id} />}

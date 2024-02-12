@@ -6,8 +6,6 @@ import { Deletebutton } from "../DeleteButton.jsx";
 import { Modifybutton } from "../ModifyButton.jsx";
 
 const ActionModal = ({ visible, hideModal, id }) => {
-  //for the modal body from the doc react-native-paper
-  //const [visible, setVisible] = React.useState(false);
   const containerStyle = { backgroundColor: "white", padding: 20 };
 
   return (
@@ -18,8 +16,8 @@ const ActionModal = ({ visible, hideModal, id }) => {
         contentContainerStyle={containerStyle}
         style={{ margin: 5 }}
       >
-        <Deletebutton id={id} />
-        <Modifybutton />
+        <Deletebutton id={id} hideModal={hideModal} />
+        <Modifybutton id={id} hideModal={hideModal} />
       </Modal>
     </Portal>
   );
