@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import { Text } from "react-native-paper";
 import { ToDoComponent } from "../toDo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const getTodos = async () => {
   try {
@@ -26,30 +27,28 @@ const TodoView = () => {
   useEffect(() => {
     getTodos().then(setTodos);
   }, []);
+  const createdTodos = todos.filter((todo) => todo.status === "todo");
   return (
     <ScrollView>
-      <View style={styles.container}>
-        {todos
-          .filter((todo) => todo.status === "todo")
-          .map((todo, index) => (
-            <ToDoComponent
-              key={index}
-              title={todo.title}
-              description={todo.description}
-            />
-          ))}
-      </View>
+      {createdTodos.length > 0 ? (
+        createdTodos.map((todo, index) => (
+          <ToDoComponent key={index} todo={todo} />
+        ))
+      ) : (
+        <View style={styles.centered}>
+          <MaterialIcons name="done-all" size={24} color="black" />
+          <Text>Aucune tache n'est ajouté</Text>
+        </View>
+      )}
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  centered: {
     flex: 1,
-    backgroundColor: "#fff",
-    padding: 10,
-    // alignItems: "center",
-    // justifyContent: "center",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 export { TodoView };

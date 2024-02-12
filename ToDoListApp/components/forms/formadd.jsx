@@ -4,14 +4,14 @@ import { Portal, Modal, Text, Button } from "react-native-paper";
 import { TextInput } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import RNPickerSelect from "react-native-picker-select";
-
+import uuid from "react-native-uuid";
 const Formadd = ({}) => {
   const [Title, setTitle] = React.useState("");
   const [Description, setDescription] = React.useState("");
   const [Status, setStatus] = React.useState("todo");
 
   const task = {
-    id: Math.random().toString(),
+    id: uuid.v4(),
     title: Title,
     description: Description,
     status: Status,
@@ -21,10 +21,6 @@ const Formadd = ({}) => {
     try {
       const tasks = await AsyncStorage.getItem("task");
       return tasks != null ? JSON.parse(tasks) : null;
-      // if (!!task) {
-      //   setTitle(task.text);
-      //   setDescription(task.description);
-      // }
     } catch (err) {
       console.log(err);
     }
@@ -39,12 +35,6 @@ const Formadd = ({}) => {
       tasksArray.push(task);
       const jsonValue = JSON.stringify(tasksArray);
       await AsyncStorage.setItem("todoLists", jsonValue);
-      // let tasks = [];
-      // if (existingTasks) {
-      //   tasks = JSON.parse(existingTasks);
-      // }
-      // const jsonValue = JSON.stringify(task);
-      // await AsyncStorage.setItem("task", jsonValue);
     } catch (err) {
       console.log(err);
     }

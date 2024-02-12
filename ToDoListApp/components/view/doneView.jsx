@@ -34,11 +34,7 @@ const DoneView = () => {
       {doneTodos.length > 0 ? (
         doneTodos.map((todo, index) => (
           <View style={styles.container}>
-            <ToDoComponent
-              key={index}
-              title={todo.title}
-              description={todo.description}
-            />
+            <ToDoComponent key={index} todo={todo} />
           </View>
         ))
       ) : (

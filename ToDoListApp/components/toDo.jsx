@@ -25,7 +25,7 @@ const ToDoComponent = (props) => {
     <View>
       <Button icon={MORE_ICON} mode="contained" onPress={showModal}>
         {"Action"}
-        <ActionModal visible={visible} hideModal={hideModal} />
+        <ActionModal visible={visible} hideModal={hideModal} id={props.id} />
       </Button>
     </View>
   );
@@ -38,11 +38,7 @@ const ToDoComponent = (props) => {
       onPress={showModal2}
     >
       {"En savoir plus"}
-      <MoreModal
-        visible={visible2}
-        hideModal={hideModal2}
-        description={props.description}
-      />
+      <MoreModal visible={visible2} hideModal={hideModal2} todo={props.todo} />
     </Text>
   );
 
@@ -50,10 +46,10 @@ const ToDoComponent = (props) => {
     <View>
       <Card style={styles.toDoElement}>
         <Card.Title
-          title={props.title}
-          subtitle={<MoreContent description={props.description} />}
+          title={props.todo.title}
+          subtitle={<MoreContent todo={props.todo} />}
           left={LeftContent}
-          right={RightContent}
+          right={() => <RightContent id={props.todo.id} />}
         />
       </Card>
     </View>

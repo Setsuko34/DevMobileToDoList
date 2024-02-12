@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import { Text } from "react-native-paper";
 import { ToDoComponent } from "../toDo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const getTodos = async () => {
   try {
@@ -25,19 +26,22 @@ const OngoingView = () => {
   useEffect(() => {
     getTodos().then(setTodos);
   }, []);
+  const onGoingTodos = todos.filter((todo) => todo.status === "ongoing");
+
   return (
     <ScrollView>
-      <View style={styles.container}>
-        {todos
-          .filter((todo) => todo.status === "ongoing")
-          .map((todo, index) => (
-            <ToDoComponent
-              key={index}
-              title={todo.title}
-              description={todo.description}
-            />
-          ))}
-      </View>
+      {onGoingTodos.length > 0 ? (
+        onGoingTodos.map((todo, index) => (
+          <View style={styles.container}>
+            <ToDoComponent key={index} todo={todo} />
+          </View>
+        ))
+      ) : (
+        <View style={styles.centered}>
+          <MaterialIcons name="done-all" size={24} color="black" />
+          <Text>Aucune tache n'est en cours</Text>
+        </View>
+      )}
     </ScrollView>
   );
 };
@@ -48,6 +52,11 @@ const styles = StyleSheet.create({
     padding: 10,
     // alignItems: "center",
     // justifyContent: "center",
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
