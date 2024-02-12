@@ -19,7 +19,8 @@ const TodoProvider = ({ children }) => {
 
   const storeTodo = async (task) => {
     try {
-      const jsonValue = JSON.stringify(task);
+      const updatedTodos = [...Todo, task];
+      const jsonValue = JSON.stringify(updatedTodos);
       await AsyncStorage.setItem("todoLists", jsonValue);
       setTodo((prev) => [...prev, task]);
     } catch (err) {
@@ -35,6 +36,21 @@ const TodoProvider = ({ children }) => {
     setTodo((prev) => prev.filter((task) => task.id !== idToDelete));
   };
 
+  const updateTodo = async (idToUpdate, updatedTask) => {
+    try {
+      setTodo((prev) => {
+        const updatedTodos = prev.map((task) =>
+          task.id === idToUpdate ? updatedTask : task
+        );
+        const jsonValue = JSON.stringify(updatedTodos);
+        AsyncStorage.setItem("todoLists", jsonValue);
+        return updatedTodos;
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getTodos().then((res) => {
       setTodo(res);
@@ -43,7 +59,12 @@ const TodoProvider = ({ children }) => {
 
   return (
     <TodoContext.Provider
-      value={{ Todo: Todo, storeTodo: storeTodo, deleteTodo: deleteTodo }}
+      value={{
+        Todo: Todo,
+        storeTodo: storeTodo,
+        deleteTodo: deleteTodo,
+        updateTodo: updateTodo,
+      }}
     >
       {children}
     </TodoContext.Provider>

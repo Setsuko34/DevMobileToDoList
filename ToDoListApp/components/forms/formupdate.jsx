@@ -6,11 +6,20 @@ import RNPickerSelect from "react-native-picker-select";
 import uuid from "react-native-uuid";
 import TodoContext from "../context/Context";
 
-const Formadd = ({ hideModal }) => {
-  const [Title, setTitle] = React.useState("");
-  const [Description, setDescription] = React.useState("");
-  const [Status, setStatus] = React.useState("todo");
-  const { storeTodo } = React.useContext(TodoContext);
+const Formupdate = ({ hideModal, todo }) => {
+  const todoGet = todo.todo;
+  const { title, description, status } = todoGet;
+
+  const [Title, setTitle] = React.useState(title);
+  const [Description, setDescription] = React.useState(description);
+  const [Status, setStatus] = React.useState(status);
+  const { updateTodo } = React.useContext(TodoContext);
+  console.log("want to update: ", todo);
+  React.useEffect(() => {
+    setTitle(title);
+    setDescription(description);
+    setStatus(status);
+  }, [todo]);
 
   return (
     <View>
@@ -65,12 +74,14 @@ const Formadd = ({ hideModal }) => {
         mode="elevated"
         onPress={() => {
           const task = {
-            id: uuid.v4(),
+            id: todoGet.id,
             title: Title,
             description: Description,
             status: Status,
           };
-          storeTodo(task);
+          console.log("updated version: ", task);
+
+          updateTodo(todoGet.id, task);
           hideModal();
         }}
         labelStyle={{ fontSize: 40 }}
@@ -80,4 +91,4 @@ const Formadd = ({ hideModal }) => {
   );
 };
 
-export { Formadd };
+export { Formupdate };

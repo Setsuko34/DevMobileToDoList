@@ -13,7 +13,7 @@ const TodoView = () => {
   // }, [Todo]);
 
   const createdTodos = Todo.filter((todo) => todo.status === "todo");
-  //console.log("createdTodos: ", createdTodos);
+  console.log("createdTodos: ", createdTodos);
   return (
     <ScrollView>
       {createdTodos.length > 0 ? (

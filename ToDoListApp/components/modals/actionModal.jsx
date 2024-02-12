@@ -5,7 +5,7 @@ import { TextInput } from "react-native-paper";
 import { Deletebutton } from "../DeleteButton.jsx";
 import { Modifybutton } from "../ModifyButton.jsx";
 
-const ActionModal = ({ visible, hideModal, id }) => {
+const ActionModal = ({ visible, hideModal, todo }) => {
   const containerStyle = { backgroundColor: "white", padding: 20 };
 
   return (
@@ -16,8 +16,8 @@ const ActionModal = ({ visible, hideModal, id }) => {
         contentContainerStyle={containerStyle}
         style={{ margin: 5 }}
       >
-        <Deletebutton id={id} hideModal={hideModal} />
-        <Modifybutton id={id} hideModal={hideModal} />
+        <Deletebutton id={todo.id} hideModal={hideModal} />
+        <Modifybutton todo={todo} />
       </Modal>
     </Portal>
   );
