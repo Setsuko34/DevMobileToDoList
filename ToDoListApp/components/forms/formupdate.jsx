@@ -15,7 +15,6 @@ const Formupdate = ({ hideModal, todo }) => {
   const [Description, setDescription] = React.useState(description);
   const [Status, setStatus] = React.useState(status);
   const { updateTodo } = React.useContext(TodoContext);
-  console.log("want to update: ", todo);
   React.useEffect(() => {
     setTitle(title);
     setDescription(description);

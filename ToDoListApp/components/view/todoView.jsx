@@ -10,7 +10,6 @@ const TodoView = () => {
   const { Todo } = React.useContext(TodoContext);
 
   const createdTodos = Todo.filter((todo) => todo.status === "todo");
-  console.log("createdTodos: ", createdTodos);
   return (
     <ScrollView>
       {createdTodos.length > 0 ? (

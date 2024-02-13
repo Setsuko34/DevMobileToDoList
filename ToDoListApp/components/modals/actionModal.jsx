@@ -7,8 +7,7 @@ import { Modifybutton } from "../ModifyButton.jsx";
 import { styles } from "../../styles/styles";
 
 const ActionModal = ({ visible, hideModal, todo }) => {
-  // const containerStyle = { };
-
+  const todoGet = todo.todo;
   return (
     <Portal>
       <Modal
@@ -18,7 +17,7 @@ const ActionModal = ({ visible, hideModal, todo }) => {
         style={styles.containerStyleMargin}
       >
         <View style={styles.alignButton}>
-          <Deletebutton id={todo.id} hideModal={hideModal} />
+          <Deletebutton id={todoGet.id} hideModal={hideModal} />
           <Modifybutton todo={todo} />
         </View>
       </Modal>
