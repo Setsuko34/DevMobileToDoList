@@ -5,6 +5,7 @@ import { TextInput } from "react-native-paper";
 import RNPickerSelect from "react-native-picker-select";
 import uuid from "react-native-uuid";
 import TodoContext from "../context/Context";
+import { styles } from "../../styles/styles";
 
 const Formupdate = ({ hideModal, todo }) => {
   const todoGet = todo.todo;
@@ -34,7 +35,7 @@ const Formupdate = ({ hideModal, todo }) => {
         value={Description}
         onChangeText={(Description) => setDescription(Description)}
         mode="outlined"
-        style={{ marginVertical: 10, height: 75 }}
+        style={styles.inputDesc}
       />
       <RNPickerSelect
         placeholder={{ label: "Choisir le status de la tâche", value: null }}
@@ -45,28 +46,7 @@ const Formupdate = ({ hideModal, todo }) => {
           { label: "OnGoing", value: "ongoing" },
           { label: "Done", value: "done" },
         ]}
-        style={{
-          inputIOS: {
-            fontSize: 16,
-            paddingVertical: 12,
-            paddingHorizontal: 10,
-            borderWidth: 1,
-            borderColor: "gray",
-            borderRadius: 4,
-            color: "black",
-            paddingRight: 30, // to ensure the text is not cut off
-          },
-          inputAndroid: {
-            fontSize: 16,
-            paddingHorizontal: 10,
-            paddingVertical: 8,
-            borderWidth: 0.5,
-            borderColor: "purple",
-            borderRadius: 8,
-            color: "black",
-            paddingRight: 30, // to ensure the text is not cut off
-          },
-        }}
+        style={{ inputIOS: styles.inputIOS, inputAndroid: styles.inputAndroid }}
       />
 
       <Button
@@ -84,8 +64,8 @@ const Formupdate = ({ hideModal, todo }) => {
           updateTodo(todoGet.id, task);
           hideModal();
         }}
-        labelStyle={{ fontSize: 40 }}
-        style={{ marginTop: 10 }}
+        labelStyle={styles.formlabelButton}
+        style={styles.formButton}
       ></Button>
     </View>
   );

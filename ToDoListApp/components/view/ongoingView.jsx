@@ -4,6 +4,7 @@ import { Text } from "react-native-paper";
 import { ToDoComponent } from "../toDo";
 import { MaterialIcons } from "@expo/vector-icons";
 import TodoContext from "../context/Context";
+import { styles } from "../../styles/styles";
 
 const OngoingView = () => {
   const { Todo } = React.useContext(TodoContext);
@@ -24,17 +25,5 @@ const OngoingView = () => {
     </ScrollView>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 10,
-  },
-  centered: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
 
 export { OngoingView };

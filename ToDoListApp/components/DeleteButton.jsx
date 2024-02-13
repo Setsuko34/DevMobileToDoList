@@ -2,6 +2,7 @@ import React from "react";
 import { Portal, Modal, Text, Button } from "react-native-paper";
 import { View } from "react-native";
 import TodoContext from "./context/Context";
+import { styles } from "../styles/styles";
 
 const Deletebutton = (props) => {
   const { deleteTodo } = React.useContext(TodoContext);
@@ -15,7 +16,7 @@ const Deletebutton = (props) => {
           props.hideModal();
           console.log("tache supprimée : ", props.id);
         }}
-        style={{ margin: 5 }}
+        style={styles.buttonMargin}
       >
         {"Supprimer la tâche"}
       </Button>

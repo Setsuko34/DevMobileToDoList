@@ -5,6 +5,7 @@ import { AppbarComponent } from "../appBar.jsx";
 import { ToDoComponent } from "../toDo.jsx";
 import { FabButton } from "../fab.jsx";
 import { BottomNavBar } from "../bottomNavBar.jsx";
+import { styles } from "../../styles/styles.jsx";
 export default function Index() {
   const theme = useTheme();
 
@@ -19,20 +20,3 @@ export default function Index() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 10,
-    // alignItems: "center",
-    // justifyContent: "center",
-  },
-  fab: {
-    position: "absolute",
-    zIndex: 1,
-    margin: 16,
-    right: 0,
-    bottom: 100,
-  },
-});

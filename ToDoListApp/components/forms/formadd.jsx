@@ -5,23 +5,26 @@ import { TextInput } from "react-native-paper";
 import RNPickerSelect from "react-native-picker-select";
 import uuid from "react-native-uuid";
 import TodoContext from "../context/Context";
+import { styles } from "../../styles/styles";
 
 const Formadd = ({ hideModal }) => {
   const [Title, setTitle] = React.useState("");
   const [Description, setDescription] = React.useState("");
-  const [Status, setStatus] = React.useState("todo");
+  const [Status, setStatus] = React.useState("");
   const { storeTodo } = React.useContext(TodoContext);
 
   return (
     <View>
       <TextInput
-        label="nom de la tâche"
+        placeholder="Nom de la tâche"
+        //label="nom de la tâche"
         value={Title}
         onChangeText={(Title) => setTitle(Title)}
         mode="outlined"
       />
       <TextInput
-        label="Description de la tâche"
+        placeholder="Description de la tâche"
+        //label="Description de la tâche"
         value={Description}
         onChangeText={(Description) => setDescription(Description)}
         mode="outlined"
@@ -36,28 +39,7 @@ const Formadd = ({ hideModal }) => {
           { label: "OnGoing", value: "ongoing" },
           { label: "Done", value: "done" },
         ]}
-        style={{
-          inputIOS: {
-            fontSize: 16,
-            paddingVertical: 12,
-            paddingHorizontal: 10,
-            borderWidth: 1,
-            borderColor: "gray",
-            borderRadius: 4,
-            color: "black",
-            paddingRight: 30, // to ensure the text is not cut off
-          },
-          inputAndroid: {
-            fontSize: 16,
-            paddingHorizontal: 10,
-            paddingVertical: 8,
-            borderWidth: 0.5,
-            borderColor: "purple",
-            borderRadius: 8,
-            color: "black",
-            paddingRight: 30, // to ensure the text is not cut off
-          },
-        }}
+        style={{ inputIOS: styles.inputIOS, inputAndroid: styles.inputAndroid }}
       />
 
       <Button
@@ -73,8 +55,8 @@ const Formadd = ({ hideModal }) => {
           storeTodo(task);
           hideModal();
         }}
-        labelStyle={{ fontSize: 40 }}
-        style={{ marginTop: 10 }}
+        labelStyle={styles.formlabelButton}
+        style={styles.formButton}
       ></Button>
     </View>
   );
